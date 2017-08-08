@@ -15,12 +15,18 @@ SafeYAML::OPTIONS[:default_mode] = :safe
 
 module Footprints
   class Application < Rails::Application
-    MAILER_CONFIG = YAML.load_file(Rails.root.join("config", "mailer.yml"))
+    config_file =  File.expand_path(Rails.root.join('config', 'application.yml'))
+    ENV.update YAML.load_file(config_file) if File.exist?(config_file)
+    mailer_config = File.expand_path(Rails.root.join('config', 'mailer.yml'))
+    ENV.update YAML.load_file(Rails.root.join("config", "mailer.yml")) if File.exist?(mailer_config)
+
     # add custom validators path
     config.autoload_paths += %W["#{config.root}/app/validators/"]
     config.autoload_paths += %W["#{config.root}/lib"]
     config.time_zone = 'Central Time (US & Canada)'
-    config.force_ssl = false
+
+    config.force_ssl = Rails.env.production?
+
     config.assets_enabled = true
     config.encoding = "utf-8"
 
@@ -37,8 +43,8 @@ module Footprints
     config.action_mailer.smtp_settings = {
       :address => "smtp.gmail.com",
       :port => 587,
-      :user_name => MAILER_CONFIG['username'],
-      :password => MAILER_CONFIG['password'],
+      :user_name => ENV['MAILER_USERNAME'],
+      :password => ENV['MAILER_PASSWORD'],
       :authentication => 'plain',
       :enable_starttls_auto => true }
 

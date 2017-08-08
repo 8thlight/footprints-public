@@ -1,3 +1,8 @@
-Footprints
+# Footprints 
+### Re-defining applicant tracking software!
 
-`rails server` to start it locally
+## Build Status
+[![Build Status](https://travis-ci.org/FootprintsAdmin/footprints-public.svg?branch=master)](https://travis-ci.org/FootprintsAdmin/footprints-public)
+
+## To get started
+`rails server` to start the application locally
