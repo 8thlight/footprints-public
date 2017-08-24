@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe ApplicantMailer do
   describe "#email_applicant" do
@@ -15,10 +15,6 @@ describe ApplicantMailer do
 
     it "renders the send email" do
       expect(mail.from).to eq(['noreply@abcinc.com'])
-    end
-
-    it "renders the bcc email" do
-      expect(mail.bcc).to eq(["dropbox@92013697.abcinc.highrisehq.com"])
     end
 
     it "renders the body" do

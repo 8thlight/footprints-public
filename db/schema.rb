@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904131223) do
+ActiveRecord::Schema.define(version: 20170813023222) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "annual_starting_craftsman_salaries", force: true do |t|
     t.string "location", null: false
@@ -19,8 +22,8 @@ ActiveRecord::Schema.define(version: 20140904131223) do
   end
 
   create_table "applicants", force: true do |t|
-    t.string   "name"
-    t.date     "applied_on"
+    t.string   "name",                                             null: false
+    t.date     "applied_on",                                       null: false
     t.string   "email"
     t.date     "initial_reply_on"
     t.date     "completed_challenge_on"
@@ -36,7 +39,6 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.string   "assigned_craftsman"
     t.string   "code_submission"
     t.text     "additional_notes"
-    t.integer  "craftsman_id"
     t.text     "about"
     t.text     "software_interest"
     t.text     "reason"
@@ -49,14 +51,15 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.boolean  "archived",                 default: false
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "mentor"
     t.date     "sent_challenge_on"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "offered_on"
+    t.string   "mentor"
   end
 
-  add_index "applicants", ["craftsman_id"], name: "index_applicants_on_craftsman_id", using: :btree
+  add_index "applicants", ["code_submission"], name: "index_applicants_on_code_submission", unique: true, using: :btree
+  add_index "applicants", ["email"], name: "index_applicants_on_email", unique: true, using: :btree
   add_index "applicants", ["name"], name: "index_applicants_on_name", using: :btree
   add_index "applicants", ["slug"], name: "index_applicants_on_slug", unique: true, using: :btree
 
@@ -71,17 +74,20 @@ ActiveRecord::Schema.define(version: 20140904131223) do
   create_table "craftsmen", force: true do |t|
     t.string  "name"
     t.string  "status"
-    t.integer "employment_id"
+    t.integer "employment_id",                         null: false
     t.string  "uid"
     t.string  "email"
-    t.string  "location",                    default: "Chicago"
-    t.boolean "archived",                    default: false
+    t.string  "location",          default: "Chicago"
+    t.boolean "archived",          default: false
     t.string  "position"
-    t.boolean "seeking",                     default: false
-    t.integer "skill",             limit: 1, default: 1,         null: false
-    t.boolean "has_apprentice",              default: false,     null: false
+    t.boolean "seeking",           default: false
+    t.integer "skill",             default: 1,         null: false
+    t.boolean "has_apprentice",    default: false,     null: false
     t.date    "unavailable_until"
   end
+
+  add_index "craftsmen", ["employment_id"], name: "index_craftsmen_on_employment_id", unique: true, using: :btree
+  add_index "craftsmen", ["employment_id"], name: "unique_employment_id", unique: true, using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -132,11 +138,13 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
-    t.string   "uid"
     t.string   "provider"
     t.integer  "craftsman_id"
     t.boolean  "employee"
     t.boolean  "admin",        default: false, null: false
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
 
 end

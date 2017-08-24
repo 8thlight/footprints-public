@@ -11,7 +11,6 @@ require 'argon/applicant_offer_letter_generator'
 require 'argon/offer_letter_post'
 require 'applicants/generate_onboarding_letter'
 require 'date'
-require 'will_paginate/array'
 
 class ApplicantsController < ApplicationController
   include ApplicantsHelper
@@ -20,8 +19,8 @@ class ApplicantsController < ApplicationController
   before_filter :require_admin, :only => [:destroy, :new, :create, :hire, :make_decision, :unassigned, :assign_craftsman]
 
   def index
-    @applicants    = Footprints::ApplicantFinder.new.get_applicants(params).paginate(:page => params[:page], :per_page => 12)
-    @presenter     = ApplicantIndexPresenter.new(@applicants)
+    @applicants = Footprints::ApplicantFinder.new.get_applicants(params)
+    @presenter  = ApplicantIndexPresenter.new(@applicants)
   end
 
   def new
@@ -205,6 +204,8 @@ class ApplicantsController < ApplicationController
     distance = target_day_of_week - end_date.cwday
     end_date + (distance.abs < 4 ? distance : distance.abs - 7).days
   end
+
+  private
 
   def employment_date_params
     params.require(:applicant).permit(:start_date, :end_date, :offered_on)
