@@ -30,13 +30,12 @@ describe SessionsController do
       get :create
 
       user = User.first
-      expect(user.uid).to      eq('123')
       expect(user.email).to    eq("test@test.com")
       expect(user.provider).to eq('google_oauth2')
     end
 
     it "finds existing user by their Oauth credentials" do
-      user = repo.user.create(email: "test@test.com", uid: "123")
+      user = repo.user.create(email: "test@test.com")
       get :create
       expect(session[:user_id]).to eq(user.id)
     end

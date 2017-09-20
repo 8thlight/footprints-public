@@ -1,5 +1,6 @@
 require 'ar_repository/models/applicant'
 require 'ar_repository/base_repository'
+require 'will_paginate'
 
 module ArRepository
   class ApplicantRepository
@@ -37,16 +38,16 @@ module ArRepository
     end
 
     def find_like(term)
-      result = where("name like #{term}")
-      result.empty? ? where("name like #{term}%") : result
+      result = where("name like ?", term)
+      result.empty? ? where("name like ?", "#{term}%") : result
     end
 
-    def get_all_archived_applicants
-      model_class.where(:archived => true).order('applied_on DESC')
+    def get_all_archived_applicants(page=nil, limit=nil)
+      model_class.where(archived: true).order('applied_on DESC').paginate(page: page, per_page: limit)
     end
 
-    def get_all_unarchived_applicants
-      model_class.where(:archived => false).order('applied_on DESC')
+    def get_all_unarchived_applicants(page=nil, limit=nil)
+      model_class.where(archived: false).order('applied_on DESC').paginate(page: page, per_page: limit)
     end
 
     def get_unassigned_unarchived_applicants

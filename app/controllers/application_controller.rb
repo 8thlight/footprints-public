@@ -16,14 +16,18 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    if !current_user || current_user.uid == nil
+    if !current_user
       session[:return_to] = request.url
       redirect_request
     end
   end
 
+  def craftsman?
+    redirect_to(root_url, :notice => "You don't have permission to do this.") unless current_user.try(:craftsman_id)
+  end
+
   def employee?
-    redirect_to(oauth_signin_url, :notice => "You don't have permission to view this page.") if !current_user || current_user.email.nil? || !current_user.email.include?("abcinc.com")|| current_user.uid == nil
+    redirect_to(oauth_signin_url, :notice => "You don't have permission to view this page.") unless current_user.try(:employee?)
   end
 
   def require_admin
