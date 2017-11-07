@@ -1606,3 +1606,59 @@ input.required {
   background: $green !important;
   color: $white !important;
 }
+
+.success-msg {
+  margin-left: 30px;
+}
+
+.admin_form_header {
+  margin-left: 30px;
+  display: inline-block;
+}
+
+.admin_form_sidebar {
+  width: 23%;
+  height: 100vh;
+  float: left;
+
+  .admin_form_tab {
+    height: 100px;
+    font-size: 1.33em;
+    text-align: center;
+    line-height: 100px;
+  }
+
+  .active {
+    background-color: $light-gray;
+  }
+}
+
+.field_answer_card_box {
+  border: 1px solid $gray;
+  width: 100%%;
+  margin: 0 10% 2% 0;
+  background-color: $light-gray;
+}
+
+.underlined {
+  border-bottom: 1px solid $gray;
+}
+
+.field-list-container {
+  margin-left: calc(23% + 32px);
+
+}
+
+.add-field-link {
+  margin-right: 75px;
+  text-align: right;
+}
+
+.form-submit {
+  margin-right: 75px;
+  text-align: right;
+
+  input {
+    background-color: $green;
+  }
+}

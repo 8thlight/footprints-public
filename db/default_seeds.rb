@@ -189,7 +189,7 @@ module DefaultSeed
         Footprints::Repository.craftsman.create({
           :name           => name,
           :location       => "Chicago",
-          :employment_id  => i,
+          :employment_id  => i + 1,
           :email          => "#{name.downcase.gsub(' ', '.')}@abcinc.com",
           :seeking        => true,
           :has_apprentice => [true, false].sample,
@@ -275,10 +275,10 @@ module DefaultSeed
 
       new_user = Footprints::Repository.user.create({
         :login => "you@abcinc.com",
-        :uid   => "107478018817920458918",
         :provider => "google_oauth2",
         :email => "you@abcinc.com",
-        :admin => true
+        :admin => true,
+        :employee => true
       })
 
       puts "new user added to the #{Rails.env} environment"
@@ -292,10 +292,10 @@ module DefaultSeed
 
       Footprints::Repository.applicant.all.each do |applicant|
         craftsman_ids = Footprints::Repository.craftsman.all.pluck(:employment_id)
-        craftsman_id = craftsman_ids.sample
-        craftsman = Footprints::Repository.craftsman.find(craftsman_id)
-        applicant.assigned_craftsman = craftsman.name
-        applicant.craftsman_id = craftsman.employment_id
+        employment_id = craftsman_ids.sample
+        craftsman = Craftsman.find_by_employment_id(employment_id)
+        AssignedCraftsmanRecord.create!(applicant_id: applicant.id, craftsman_id: employment_id)
+
         applicant.save
         puts "#{craftsman.name} has been assigned to #{applicant.name}"
       end
