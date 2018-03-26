@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.1.0'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -20,6 +20,10 @@ gem "httparty", '~> 0.13.0'
 gem "american_date"
 
 gem 'warehouse', git: 'https://github.com/ryanzverner/stockroom-ruby-client.git'
+
+group :development do
+  gem 'pry-byebug'
+end
 
 group :doc do
   gem 'sdoc', require: false
