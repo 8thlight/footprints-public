@@ -1,3 +1,3 @@
-Footprints
+Footprints Project for Weirich Institute
 
-`rails server` to start it locally
+Current progress viewable at https://footprints.fun

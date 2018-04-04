@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.1.0'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -18,15 +18,21 @@ gem "omniauth-google-oauth2", '~> 0.2.2'
 gem "edn", '~> 1.0.2'
 gem "httparty", '~> 0.13.0'
 gem "american_date"
+gem 'sqlite3', '~> 1.3.9'
+gem 'devise'
 
 gem 'warehouse', git: 'https://github.com/ryanzverner/stockroom-ruby-client.git'
+
+group :development do
+  gem 'pry-byebug'
+end
 
 group :doc do
   gem 'sdoc', require: false
 end
 
 group :test, :development do
-  gem "sqlite3", '~> 1.3.9'
+  #gem "sqlite3", '~> 1.3.9'
   gem "rspec-rails", '~> 2.14.1'
   gem "teaspoon"
   gem "teaspoon-jasmine"
@@ -38,6 +44,6 @@ gem 'simplecov', :require => false, :group => :test
 
 group :production do
   gem 'unicorn', '~> 4.8.2'
-  gem 'mysql2', '~> 0.3.15'
+  #gem 'mysql2', '~> 0.3.15'
 end
 

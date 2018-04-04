@@ -6,10 +6,9 @@ log/
 .bundle/
 .bash_profile
 config/omniauth-vals.txt
-config/mailer.yml
-config/database.yml
 coverage/
 db/footprints_test.db
+db/production.sqlite3
 .ruby-version
 .ruby-gemset
 .sass-cache

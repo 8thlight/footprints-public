@@ -244,10 +244,10 @@ module DefaultSeed
       puts "#{new_craftsman.name} added to the #{Rails.env} environment"
 
       new_craftsman = Footprints::Repository.craftsman.create({
-        :name           => "Natalie Snow",
+        :name           => "Matt Jaffe",
         :location       => "Chicago",
         :employment_id  => 102,
-        :email          => "you@abcinc.com",
+        :email          => "matt.jaffe@yello.co",
         :seeking        => true,
         :has_apprentice => [true, false].sample,
         :skill          => [1, 2].sample})
@@ -274,10 +274,10 @@ module DefaultSeed
       puts "new user added to the #{Rails.env} environment"
 
       new_user = Footprints::Repository.user.create({
-        :login => "you@abcinc.com",
+        :login => "matt.jaffe@yello.co",
         :uid   => "107478018817920458918",
         :provider => "google_oauth2",
-        :email => "you@abcinc.com",
+        :email => "matt.jaffe@yello.co",
         :admin => true
       })
 

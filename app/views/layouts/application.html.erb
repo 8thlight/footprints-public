@@ -17,7 +17,7 @@
       <div class="container">
         <h1><a href="/">Footprints</a></h1>
         <div class="toggle-nav"></div>
-        <%= link_to "Log out", sessions_destroy_path, {:class => "nav-link", :method => :delete} %>
+        <%= link_to "Log out", destroy_user_session_path, {:class => "nav-link", :method => :delete} %>
       </div>
       <nav class="hidden">
         <div class="container">
@@ -35,7 +35,7 @@
               <li><span class="nav-icon templates"></span><p>Templates</p></li>
             </a>
 
-            <% if admin? %>
+            <% if current_user && admin? %>
               <a href="/salaries/edit">
                 <li><span class="nav-icon salaries"></span><p>Salaries</p></li>
               </a>

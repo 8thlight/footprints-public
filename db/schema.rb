@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904131223) do
+ActiveRecord::Schema.define(version: 20180329014741) do
 
   create_table "annual_starting_craftsman_salaries", force: true do |t|
     t.string "location", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.date     "begin_refactoring_on"
     t.date     "resubmitted_challenge_on"
     t.date     "decision_made_on"
-    t.string   "hired",                    default: "no_decision"
+    t.string   "hired",                                default: "no_decision"
     t.string   "codeschool"
     t.string   "college_degree"
     t.string   "cs_degree"
@@ -40,25 +40,25 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.text     "about"
     t.text     "software_interest"
     t.text     "reason"
-    t.text     "url"
+    t.text     "url",                      limit: 255
     t.string   "slug"
     t.boolean  "has_steward"
     t.string   "skill"
     t.string   "discipline"
     t.string   "location"
-    t.boolean  "archived",                 default: false
+    t.boolean  "archived",                             default: false
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "mentor"
     t.date     "sent_challenge_on"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "offered_on"
+    t.string   "mentor"
   end
 
-  add_index "applicants", ["craftsman_id"], name: "index_applicants_on_craftsman_id", using: :btree
-  add_index "applicants", ["name"], name: "index_applicants_on_name", using: :btree
-  add_index "applicants", ["slug"], name: "index_applicants_on_slug", unique: true, using: :btree
+  add_index "applicants", ["craftsman_id"], name: "index_applicants_on_craftsman_id"
+  add_index "applicants", ["name"], name: "index_applicants_on_name"
+  add_index "applicants", ["slug"], name: "index_applicants_on_slug", unique: true
 
   create_table "assigned_craftsman_records", force: true do |t|
     t.integer  "applicant_id"
@@ -71,15 +71,15 @@ ActiveRecord::Schema.define(version: 20140904131223) do
   create_table "craftsmen", force: true do |t|
     t.string  "name"
     t.string  "status"
-    t.integer "employment_id"
+    t.integer "employment_id",     limit: 255
     t.string  "uid"
     t.string  "email"
-    t.string  "location",                    default: "Chicago"
-    t.boolean "archived",                    default: false
+    t.string  "location",                      default: "Chicago"
+    t.boolean "archived",                      default: false
     t.string  "position"
-    t.boolean "seeking",                     default: false
-    t.integer "skill",             limit: 1, default: 1,         null: false
-    t.boolean "has_apprentice",              default: false,     null: false
+    t.boolean "seeking",                       default: false
+    t.integer "skill",                         default: 1,         null: false
+    t.boolean "has_apprentice",                default: false,     null: false
     t.date    "unavailable_until"
   end
 
@@ -91,10 +91,10 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "messages", force: true do |t|
     t.integer  "applicant_id"
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.datetime "updated_at"
   end
 
-  add_index "messages", ["applicant_id"], name: "index_messages_on_applicant_id", using: :btree
+  add_index "messages", ["applicant_id"], name: "index_messages_on_applicant_id"
 
   create_table "monthly_apprentice_salaries", force: true do |t|
     t.integer "duration", null: false
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20140904131223) do
   end
 
   create_table "notes", force: true do |t|
-    t.text     "body"
+    t.text     "body",         limit: 255
     t.integer  "craftsman_id"
     t.integer  "applicant_id"
     t.datetime "created_at"
@@ -131,12 +131,24 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.string   "login"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email"
+    t.string   "email",                                  null: false
     t.string   "uid"
     t.string   "provider"
     t.integer  "craftsman_id"
     t.boolean  "employee"
-    t.boolean  "admin",        default: false, null: false
+    t.boolean  "admin",                  default: false, null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
