@@ -11,12 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904131223) do
+ActiveRecord::Schema.define(version: 20180404215451) do
 
   create_table "annual_starting_craftsman_salaries", force: true do |t|
     t.string "location", null: false
     t.float  "amount",   null: false
   end
+
+  add_index "annual_starting_craftsman_salaries", ["location"], name: "index_annual_starting_craftsman_salaries_on_location", unique: true
 
   create_table "applicants", force: true do |t|
     t.string   "name"
@@ -56,7 +58,9 @@ ActiveRecord::Schema.define(version: 20140904131223) do
     t.string   "mentor"
   end
 
+  add_index "applicants", ["code_submission"], name: "index_applicants_on_code_submission", unique: true
   add_index "applicants", ["craftsman_id"], name: "index_applicants_on_craftsman_id"
+  add_index "applicants", ["email"], name: "index_applicants_on_email", unique: true
   add_index "applicants", ["name"], name: "index_applicants_on_name"
   add_index "applicants", ["slug"], name: "index_applicants_on_slug", unique: true
 
