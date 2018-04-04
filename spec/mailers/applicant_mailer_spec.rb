@@ -14,7 +14,7 @@ describe ApplicantMailer do
     end
 
     it "renders the send email" do
-      expect(mail.from).to eq(['noreply@abcinc.com'])
+      expect(mail.from).to eq(['recruiter@abcinc.com'])
     end
 
     it "renders the bcc email" do
