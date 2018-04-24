@@ -27,10 +27,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    if !current_user.admin
-      flash[:error] = ["You are not authorized to view this page"]
-      redirect_to(root_url)
-    end
+    # if !current_user.admin
+    #   flash[:error] = ["You are not authorized to view this page"]
+    #   redirect_to(root_url)
+    # end
   end
 
   def redirect_request
