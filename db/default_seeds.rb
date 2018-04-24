@@ -243,10 +243,10 @@ module DefaultSeed
       puts "#{new_craftsman.name} added to the #{Rails.env} environment"
 
       new_craftsman = Footprints::Repository.craftsman.create({
-        :name           => "Natalie Snow",
+        :name           => "Kyle Krull",
         :location       => "Chicago",
         :employment_id  => 102,
-        :email          => "you@abcinc.com",
+        :email          => "kkrull@8thlight.com",
         :seeking        => true,
         :has_apprentice => [true, false].sample,
         :skill          => [1, 2].sample})

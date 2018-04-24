@@ -8,10 +8,10 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       provider: "google_oauth2",
       uid: "107478018817920458918",
       info: {
-        name: "Megan Smith",
-        email: "you@abcinc.com",
-        first_name: "Megan",
-        last_name: "Smith"
+        name: "Kyle Krull",
+        email: "kkrull@8thlight.com",
+        first_name: "Kyle",
+        last_name: "Krull"
       },
       extra: {
         id_token: "ID_TOKEN"
