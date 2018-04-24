@@ -3,9 +3,9 @@ require './lib/warehouse/fake_api'
 require 'warehouse/json_api'
 
 if Rails.env.local?
-  WAREHOUSE_URL = "http://0.0.0.0:8080"
-  Warehouse::APIFactory.class_name = Warehouse::FakeAPI
+  WAREHOUSE_URL = "http://localhost:8080"
+  Warehouse::APIFactory.class_name = Warehouse::JsonAPI
 else
-  WAREHOUSE_URL = "https://warehouse-staging.abcinc.com"
-  Warehouse::APIFactory.class_name = Warehouse::FakeAPI
+  WAREHOUSE_URL = "http://localhost:8080"
+  Warehouse::APIFactory.class_name = Warehouse::JsonAPI
 end
