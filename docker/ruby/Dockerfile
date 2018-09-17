@@ -16,4 +16,3 @@ COPY . /app
 
 # Apply migrations
 RUN bin/rake db:migrate
-RUN bin/rake db:seed
