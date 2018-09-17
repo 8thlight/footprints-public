@@ -1,3 +1,4 @@
+# Database connection credentials
 development:
   adapter: sqlite3
   database: db/development.db3

@@ -1,3 +1,9 @@
+# ActionMailer configuration
+#
+# This file configures ActionMailer with credentials to connect to an SMTP
+# server for sending transactional emails.
+#
+# @see config/application.rb
 username: some username
 password: some password
 apprenticeship_steward: some email
